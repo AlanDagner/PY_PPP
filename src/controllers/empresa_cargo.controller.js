@@ -22,8 +22,8 @@ export const listarEmpresa_cargoId = async(req,res)=>{
 
 export const crearEmpresa_cargo = async(req,res)=>{
     try {
-        const{estado, fecha, id_empresa, id_cargo, id_persona}= req.body;
-        await pool.query('select *from fc_crear_empresa_cargo($1, $2, $3, $4, $5)',[estado, fecha, id_empresa, id_cargo, id_persona]);
+        const{id_empresa, id_cargo, id_persona, estado}= req.body;
+        await pool.query('select *from fc_crear_empresa_cargo($1, $2, $3, $4)',[id_empresa, id_cargo, id_persona, estado]);
         return res.status(200).json({
             message:'Registrado correctamente ...!'
         });
@@ -36,8 +36,8 @@ export const crearEmpresa_cargo = async(req,res)=>{
 export const actualizarEmpresa_cargo = async(req,res)=>{
     try {
         const id = parseInt(req.params.id);
-        const {estado, fecha, id_empresa, id_cargo, id_persona} = req.body;
-        await pool.query('select *from fc_actualizar_empresa_cargo($1, $2, $3, $4, $5 ,$6)',[estado, fecha, id_empresa, id_cargo, id_persona, id]);
+        const {id_empresa, id_cargo, id_persona, estado} = req.body;
+        await pool.query('select *from fc_actualizar_empresa_cargo($1, $2, $3, $4, $5)',[id_empresa, id_cargo, id_persona, estado, id]);
         return res.status(200).json({
             message:'Modificado correctamente ...!'
         });

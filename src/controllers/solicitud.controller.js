@@ -3,7 +3,7 @@ import { pool } from '../database'
 
 export const listarSolicitud = async (req,res)=>{
     try {
-        const response = await pool.query('select *from fc_listar_solicitud()');
+        const response = await pool.query('SELECT e.nombre, es.codigo, s.estado_solicitud, es.ciclo, p.nombre, p.ape_paterno, p.ape_materno FROM solicitud s, empresa e, estudiante es, persona p  where s.id_empresa = e.id_empresa AND s.id_estudiante = es.id_estudiante and es.id_persona = p.id_persona');
         return res.status(200).json(response.rows);
     } catch (e) {
         return res.status(500).json('Error al listar solicitudes');
